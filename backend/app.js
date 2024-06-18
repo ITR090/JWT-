@@ -15,8 +15,9 @@ const users_routers = require('./Routes/userRoutes')
 
 if(process.env.NODE_ENV === 'Prod'){
     const __dirname = path.resolve()
-    app.use(express.static(path.join(__dirname,'frontend/dist')))
+    app.use(express.static(path.join(__dirname,'/frontend/dist')))
     app.get('*',(req,res)=> res.sendFile(path.resolve(__dirname,'frontend','dist','index.html')))
+    console.log('prod')
 }
 
 // DB connect
