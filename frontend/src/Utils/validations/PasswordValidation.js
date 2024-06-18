@@ -4,7 +4,7 @@ const password_validation = {
     message: "Password is required",
   },
   minLength: {
-    value: 8,
+    value: 6,
     message: "min 6 characters",
   },
   maxLength: {

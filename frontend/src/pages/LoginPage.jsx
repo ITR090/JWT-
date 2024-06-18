@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import FormContainer from "../components/FormContainer";
 import {Row,Col,Button,Form} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import {  useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message"
-
+import {useDispatch,useSelector} from 'react-redux'
 import PasswordValidation from '../Utils/validations/PasswordValidation'
 import EmailValidation from '../Utils/validations/EmailValidation'
-
+import { useLoginMutation } from "../slices/usersApiSlices";
+import { setCredentials } from "../slices/authSlices";
 
 function LoginPage() {
 
 
   const {register,handleSubmit , formState: { errors }} = useForm();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [login, {isLoading}] = useLoginMutation()
+  const {userInfo} = useSelector((state)=>state.client_auth)
 
+  useEffect(()=>{
+    if(userInfo){
+      navigate('/')
+    }
+  },[navigate,userInfo])
 
-  const submitHandler =handleSubmit(data=>{
-    console.log(data)
+  const  submitHandler  = handleSubmit (async data=>{
+    const {email, password } =data
+    try {
+      const response = await login({email,password}).unwrap()
+      console.log(response)
+      dispatch(setCredentials({...response}))
+      navigate('/')
+    } catch (error) {
+      console.log(error.data.error)
+    }
   });
 
   return (

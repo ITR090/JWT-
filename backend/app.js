@@ -15,7 +15,8 @@ mongoose.connect(process.env.MONGO_URI)
     app.listen(port, ()=>console.log('Server started'))
 })
 .catch((err)=>{
-console.log(err)
+//console.log(err)
+console.log('error')
 })
 
 // middlewares
