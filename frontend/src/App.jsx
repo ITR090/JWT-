@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <Header/>
+      <ToastContainer/>
       <Container className='my-2'>
         <Outlet />
       </Container>

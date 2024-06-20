@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const path = require('path')
 dotenv.config()
-const port = process.env.PORT || 5000
+const port = process.env.PORT //|| 8000
 // init application
 const app = express()
 // import user routers 
@@ -13,7 +13,7 @@ const users_routers = require('./Routes/userRoutes')
 
 // check env if prod or dev
 
-if(process.env.NODE_ENV === 'Prod'){
+if(process.env.NODE_ENV === 'dev'){
     const __dirname = path.resolve()
     app.use(express.static(path.join(__dirname,'/frontend/dist')))
     app.get('*',(req,res)=> res.sendFile(path.resolve(__dirname,'frontend','dist','index.html')))

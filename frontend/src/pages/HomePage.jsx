@@ -1,8 +1,13 @@
 import React from 'react'
 import { Container, Card, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux'
 
 const HomePage = () => {
+
+    const {userInfo} = useSelector((state) => state.client_auth)
+
+
     return (
         <div className=' py-5'>
             <Container className='d-flex justify-content-center'>
@@ -13,7 +18,7 @@ const HomePage = () => {
                         an HTTP-Only cookie. It also uses Redux Toolkit and the React
                         Bootstrap library
                     </p>
-                    <div className='d-flex'>
+                    {!userInfo && <div className='d-flex'>
                         <LinkContainer to='/Login'>
                         <Button variant='primary'  className='me-3'>
                             Login
@@ -24,7 +29,7 @@ const HomePage = () => {
                             Register
                         </Button>
                         </LinkContainer>
-                    </div>
+                    </div>}
                 </Card>
             </Container>
         </div>

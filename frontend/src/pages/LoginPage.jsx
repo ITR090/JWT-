@@ -9,7 +9,7 @@ import PasswordValidation from '../Utils/validations/PasswordValidation'
 import EmailValidation from '../Utils/validations/EmailValidation'
 import { useLoginMutation } from "../slices/usersApiSlices";
 import { setCredentials } from "../slices/authSlices";
-
+import { toast } from "react-toastify";
 function LoginPage() {
 
 
@@ -33,7 +33,7 @@ function LoginPage() {
       dispatch(setCredentials({...response}))
       navigate('/')
     } catch (error) {
-      console.log(error.data.error)
+      toast.error(error.data.error)
     }
   });
 
@@ -42,6 +42,7 @@ function LoginPage() {
     <FormContainer>
       <h4>Login</h4>
       <Form className="p-3" onSubmit={submitHandler}>
+        
         <Form.Group>
           <Form.Label>Email</Form.Label>
           <Form.Control
